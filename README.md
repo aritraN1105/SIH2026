@@ -366,12 +366,12 @@ SIH-SRM-2026/
 
 | Member   | Role                        | Responsibilities                              |
 | -------- | --------------------------- | --------------------------------------------- |
-| Member 1 | ML / Deep Learning          | Model, preprocessing, inference               |
-| Member 2 | Frontend                    | Web interface and visualization               |
-| Member 3 | Backend                     | FastAPI, APIs, ML integration                 |
-| Member 4 | GIS / Remote Sensing        | Satellite data, GeoTIFF, maps                 |
-| Member 5 | Data & Evaluation           | Dataset, PSNR, SSIM, comparison               |
-| Member 6 | Integration & Documentation | GitHub, integration, testing, PPT, deployment |
+| Snehashis Mandal | ML / Deep Learning          | Model, preprocessing, inference               |
+| Aritra Dutta | Frontend                    | Web interface and visualization, GitHub              |
+| Asmita Hajra | Backend                     | FastAPI, APIs, ML integration                 |
+| Aritra Saha | GIS / Remote Sensing        | Satellite data, GeoTIFF, maps                 |
+| Shreya Mahato | Data & Evaluation           | Dataset, PSNR, SSIM, comparison               |
+| Priya | Integration & Documentation |  integration, testing, PPT, deployment |
 
 ---
 
