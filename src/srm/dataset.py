@@ -8,14 +8,14 @@ import rasterio
 
 class SatelliteDataset(Dataset):
     """
-    PyTorch dataset for satellite GeoTIFF images.
+    PyTorch dataset for paired satellite GeoTIFF images.
 
-    Expected structure:
+    LR images are the input.
+    HR images are the target.
 
-    data/
-    └── processed/
-        ├── low_resolution/
-        └── high_resolution/
+    Example:
+        LR: 160 x 160 x 3
+        HR: 480 x 480 x 3
     """
 
     def __init__(self, lr_dir, hr_dir):
@@ -32,7 +32,18 @@ class SatelliteDataset(Dataset):
             )
 
         if len(self.lr_files) == 0:
-            raise ValueError("No .tif files found in the dataset directories.")
+            raise ValueError(
+                f"No .tif files found in {self.lr_dir}"
+            )
+
+        # Verify that LR and HR filenames match
+        for lr_path, hr_path in zip(self.lr_files, self.hr_files):
+            if lr_path.name != hr_path.name:
+                raise ValueError(
+                    f"LR/HR filename mismatch:\n"
+                    f"LR: {lr_path.name}\n"
+                    f"HR: {hr_path.name}"
+                )
 
     def __len__(self):
         return len(self.lr_files)
@@ -41,14 +52,22 @@ class SatelliteDataset(Dataset):
         lr_path = self.lr_files[index]
         hr_path = self.hr_files[index]
 
+        # Read LR image
         with rasterio.open(lr_path) as src:
             lr = src.read().astype(np.float32)
 
+        # Read HR image
         with rasterio.open(hr_path) as src:
             hr = src.read().astype(np.float32)
 
-        # Convert to PyTorch tensors
+        # Convert from NumPy arrays:
+        # (bands, height, width)
+        # to PyTorch tensors
         lr = torch.from_numpy(lr)
         hr = torch.from_numpy(hr)
 
         return lr, hr
+
+
+if __name__ == "__main__":
+    print("SatelliteDataset module OK")

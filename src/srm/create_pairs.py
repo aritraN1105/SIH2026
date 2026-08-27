@@ -5,7 +5,7 @@ import rasterio
 from rasterio.enums import Resampling
 
 
-def create_lr_image(hr_path, lr_path, scale=4):
+def create_lr_image(hr_path, lr_path, scale=3):
     """
     Create a low-resolution image from a high-resolution GeoTIFF.
 
